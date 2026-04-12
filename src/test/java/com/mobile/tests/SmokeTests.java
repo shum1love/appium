@@ -6,21 +6,22 @@ import com.mobile.pages.SearchScreen;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+
 class SmokeTests extends BaseTest {
 
     private static final String SEARCH_QUERY = "Appium";
 
     @Test
     void appShouldOpenSuccessfully() {
-        MainScreen mainScreen = new MainScreen(driver);
+        final MainScreen mainScreen = openMainScreen();
 
         Assertions.assertTrue(mainScreen.isOpened(), "Wikipedia main screen should be opened");
     }
 
     @Test
     void searchShouldWork() {
-        MainScreen mainScreen = new MainScreen(driver);
-        SearchScreen searchScreen = mainScreen.openSearch();
+        final MainScreen mainScreen = openMainScreen();
+        final SearchScreen searchScreen = mainScreen.openSearch();
 
         searchScreen.typeSearchQuery(SEARCH_QUERY);
 
@@ -29,8 +30,8 @@ class SmokeTests extends BaseTest {
 
     @Test
     void searchResultsShouldBeDisplayed() {
-        MainScreen mainScreen = new MainScreen(driver);
-        SearchScreen searchScreen = mainScreen.openSearch();
+        final MainScreen mainScreen = openMainScreen();
+        final SearchScreen searchScreen = mainScreen.openSearch();
 
         searchScreen.typeSearchQuery(SEARCH_QUERY);
 
@@ -39,8 +40,8 @@ class SmokeTests extends BaseTest {
 
     @Test
     void shouldOpenArticleFromSearchResults() {
-        MainScreen mainScreen = new MainScreen(driver);
-        SearchScreen searchScreen = mainScreen.openSearch();
+        final MainScreen mainScreen = openMainScreen();
+        final SearchScreen searchScreen = mainScreen.openSearch();
 
         searchScreen.typeSearchQuery(SEARCH_QUERY)
                 .openFirstArticle();
@@ -50,8 +51,8 @@ class SmokeTests extends BaseTest {
 
     @Test
     void backButtonShouldReturnToSearchScreen() {
-        MainScreen mainScreen = new MainScreen(driver);
-        SearchScreen searchScreen = mainScreen.openSearch();
+        final MainScreen mainScreen = openMainScreen();
+        final SearchScreen searchScreen = mainScreen.openSearch();
 
         searchScreen.typeSearchQuery(SEARCH_QUERY)
                 .openFirstArticle();

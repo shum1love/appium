@@ -14,12 +14,12 @@ public class SearchScreen {
     private final AndroidDriver driver;
     private final WaitUtils waitUtils;
 
-    public SearchScreen(AndroidDriver driver) {
+    public SearchScreen(final AndroidDriver driver) {
         this.driver = driver;
         this.waitUtils = new WaitUtils(driver);
     }
 
-    public SearchScreen typeSearchQuery(String query) {
+    public SearchScreen typeSearchQuery(final String query) {
         waitUtils.waitForVisible(SEARCH_INPUT).sendKeys(query);
         return this;
     }
@@ -28,8 +28,9 @@ public class SearchScreen {
         return waitUtils.waitForAnyVisible(SEARCH_RESULTS_TITLES);
     }
 
-    public void openFirstArticle() {
+    public SearchScreen openFirstArticle() {
         waitUtils.waitForVisible(SEARCH_RESULTS_TITLES).click();
+        return this;
     }
 
     public boolean isArticleOpened() {
