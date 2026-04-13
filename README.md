@@ -1,122 +1,62 @@
 # Appium Smoke Tests (Android Wikipedia)
 
-Простой проект смок-тестов для Android-приложения Wikipedia на `Java + Appium + JUnit 5 + Maven`.
+Небольшой, но аккуратный проект на `Java + Appium + JUnit 5 + Maven` с Allure-отчетами. Структура разделяет тестовую логику и прикладной код (драйвер, экраны, утилиты), чтобы легко добавлять новые кейсы.
 
-Тесты покрывают базовый пользовательский путь:
-- запуск приложения;
-- открытие поиска;
-- ввод поискового запроса;
-- проверка появления результатов;
-- открытие статьи и возврат назад.
-
-## 1. Что нужно установить
-
+## Требования
 - Java 17+
 - Maven 3.9+
 - Node.js LTS (для Appium)
-- Android Studio (с Android SDK и эмулятором)
-- Appium Server 2.x
-- Appium драйвер `uiautomator2`
+- Android SDK + эмулятор или реальное устройство
+- Appium Server 2.x и драйвер `uiautomator2`  
+  ```bash
+  npm install -g appium
+  appium driver install uiautomator2
+  ```
 
-Команды для Appium (один раз):
-
-```bash
-npm install -g appium
-appium driver install uiautomator2
-```
-
-Проверка:
-
-```bash
-appium -v
-appium driver list --installed
-```
-
-## 2. Подготовка эмулятора
-
-1. Открой Android Studio.
-2. Запусти AVD через Device Manager.
-3. Убедись, что устройство видно:
-
-```bash
-adb devices
-```
-
-4. Установи Wikipedia на эмулятор (если ещё не установлена):
-   - через Play Market на эмуляторе, или
-   - через apk:
-
-```bash
-adb install path\to\wikipedia.apk
-```
-
-По умолчанию в проекте используются:
-- `appPackage=org.wikipedia`
-- `appActivity=org.wikipedia.main.MainActivity`
-
-## 3. Запуск Appium Server
-
-В отдельном терминале:
-
-```bash
-appium
-```
-
-Сервер должен слушать `http://127.0.0.1:4723`.
-
-## 4. Запуск тестов
-
-Из корня проекта:
-
-```bash
-mvn test
-```
-
-Запуск одного теста:
-
-```bash
-mvn -Dtest=SmokeTests#searchResultsShouldBeDisplayed test
-```
-
-## 5. Параметры запуска через `-D`
-
-Можно переопределить параметры без изменений в коде:
-
-```bash
-mvn test -DdeviceName="Pixel_7_API_34" -DplatformVersion="14" -DappiumServerUrl="http://127.0.0.1:4723" -DnoReset=true -DnewCommandTimeoutSec=120
-```
-
-Доступные параметры:
-- `appiumServerUrl`
-- `deviceName`
-- `platformName` (по умолчанию `Android`)
-- `platformVersion`
-- `automationName` (по умолчанию `UiAutomator2`)
-- `appPackage`
-- `appActivity`
-- `noReset`
-- `newCommandTimeoutSec`
-
-## 6. Структура проекта
-
-- `src/test/java/com/mobile/config/TestConfig.java` — чтение всех `-D` параметров.
-- `src/test/java/com/mobile/driver/DriverFactory.java` — создание `AndroidDriver`.
+## Структура проекта (главное)
+- `src/main/java/com/mobile/helper/DriverFactory.java` — создание `AndroidDriver` с учетом `-D` параметров.
+- `src/main/java/com/mobile/utils/TestConfig.java` — все конфигурации и capability-параметры.
+- `src/main/java/com/mobile/utils/WaitUtils.java` — ожидания и клики с таймаутами.
+- `src/main/java/com/mobile/screens/*` — Screen Objects (действия и проверки экранов).
+- `src/main/java/com/mobile/dto/SearchData.java` — пример хранения тестовых данных.
+- `src/main/java/com/mobile/enums`, `locators` — заготовки под перечисления и общие локаторы.
 - `src/test/java/com/mobile/base/BaseTest.java` — общий setup/teardown.
-- `src/test/java/com/mobile/pages/*` — page objects (экраны приложения).
-- `src/test/java/com/mobile/tests/SmokeTests.java` — сами смок-тесты.
-- `src/test/java/com/mobile/utils/WaitUtils.java` — ожидания элементов.
+- `src/test/java/com/mobile/tests/smoke/*` — по одному smоke-кейсу на класс.
 
-## 7. Что делать, если тесты упали
+## Запуск
+1) Запусти эмулятор/устройство (`adb devices` должен показать девайс).  
+2) Подними Appium:
+   ```bash
+   appium
+   ```
+3) Запусти все тесты:
+   ```bash
+   mvn test
+   ```
+4) Посмотреть отчёт Allure:
+   ```bash
+   mvn allure:serve
+   ```
+   или с сохранением отчёта:
+   ```bash
+   mvn allure:report
+   ```
 
-1. Проверь, что эмулятор запущен и виден в `adb devices`.
-2. Проверь, что Appium сервер запущен.
-3. Проверь, что Wikipedia открывается вручную на эмуляторе.
-4. Если изменился UI приложения, обнови локаторы в `src/test/java/com/mobile/pages`.
-5. Если тест стартует не с главного экрана, выставь `-DnoReset=false` и запусти снова.
+### Параметры через `-D` (пример)
+```bash
+mvn test -DdeviceName="Pixel_7_API_34" -DplatformVersion="14" -DappiumServerUrl="http://127.0.0.1:4723"
+```
+Доступны также: `automationName`, `appPackage`, `appActivity`, `noReset`, `newCommandTimeoutSec`, `platformName`.
 
-## 8. Что показать на ревью
+## Как писать новые тесты
+1) Найди локаторы через Appium Inspector и добавь действия/проверки в нужный Screen (`src/main/java/com/mobile/screens`), используя `@Step` для красивых шагов в отчёте.
+2) Общие утилиты кладём в `utils`, работу с драйвером — в `helper`.
+3) Для каждого сценария создай отдельный тест-класс в `src/test/java/com/mobile/tests/smoke` (или другой пакет по смыслу). Наследуйся от `BaseTest`.
+4) Добавляй аннотации Allure (`@Epic`, `@Feature`, `@Story`, `@Severity`, `@Owner`, `@DisplayName`) прямо на тесты.
+5) Держи тесты короткими: `Arrange` (подготовка данных/экрана) → `Act` (действие) → `Assert` (проверка).
 
-- Демонстрацию полного прогона `mvn test`.
-- Пример точечного прогона одного теста.
-- Где меняются capability-параметры через `-D...`.
-- Где лежат page objects и почему такая структура удобна для поддержки.
+## Быстрый чеклист, если что-то упало
+- Устройство видно в `adb devices`, Appium запущен на `http://127.0.0.1:4723`.
+- Пакет/активити совпадают с установленным приложением (`org.wikipedia/.main.MainActivity` по умолчанию).
+- Если приложение открывается не с главной страницы — попробуй `-DnoReset=false`.
+- Если поменялись идентификаторы элементов — обнови локаторы в соответствующем Screen.

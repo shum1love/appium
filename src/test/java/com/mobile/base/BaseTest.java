@@ -1,12 +1,16 @@
 package com.mobile.base;
 
-import com.mobile.driver.DriverFactory;
-import com.mobile.pages.MainScreen;
-import com.mobile.pages.OnboardingScreen;
+import com.mobile.helper.DriverFactory;
+import com.mobile.screens.MainScreen;
+import com.mobile.screens.OnboardingScreen;
+import io.qameta.allure.Step;
+import io.qameta.allure.junit5.AllureJunit5;
 import io.appium.java_client.android.AndroidDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+@ExtendWith(AllureJunit5.class)
 public abstract class BaseTest {
 
     protected AndroidDriver driver;
@@ -23,6 +27,7 @@ public abstract class BaseTest {
         }
     }
 
+    @Step("Open Wikipedia main screen")
     protected MainScreen openMainScreen() {
         final OnboardingScreen onboardingScreen = new OnboardingScreen(driver);
         onboardingScreen.closeIfDisplayed();
