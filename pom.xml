@@ -16,7 +16,8 @@
         <appium.java.client.version>9.2.3</appium.java.client.version>
         <selenium.version>4.20.0</selenium.version>
         <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
-        <allure.version>LATEST</allure.version>
+        <allure.junit5.version>2.29.0</allure.junit5.version>
+        <allure.maven.plugin.version>2.12.0</allure.maven.plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -48,7 +49,7 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
-            <version>${allure.version}</version>
+            <version>${allure.junit5.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -73,7 +74,7 @@
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>${allure.version}</version>
+                <version>${allure.maven.plugin.version}</version>
             </plugin>
         </plugins>
     </build>
