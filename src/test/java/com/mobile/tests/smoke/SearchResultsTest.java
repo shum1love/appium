@@ -10,7 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-/** Проверяет, что поиск возвращает результаты по базовому запросу. */
 @Epic("Wikipedia Android")
 @Feature("Поиск")
 @Story("Получение результатов поиска")

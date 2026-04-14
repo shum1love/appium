@@ -9,7 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-/** Проверяет выход из поиска на главную страницу. */
 @Epic("Wikipedia Android")
 @Feature("Навигация")
 @Story("Закрытие поиска")

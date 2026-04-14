@@ -10,7 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-/** Проверяет, что строка поиска остаётся на экране после ввода запроса. */
 @Epic("Wikipedia Android")
 @Feature("Поиск")
 @Story("Отображение поля поиска")
