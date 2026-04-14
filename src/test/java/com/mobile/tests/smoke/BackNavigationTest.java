@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 class BackNavigationTest extends BaseTest {
 
     @Test
-    @DisplayName("Кнопка \"Назад\" возвращает на экран поиска")
+    @DisplayName("Кнопка 'Назад' возвращает на экран поиска")
     void backButtonShouldReturnToSearchScreen() {
         final MainScreen mainScreen = openMainScreen();
         final SearchScreen searchScreen = mainScreen.openSearch();
