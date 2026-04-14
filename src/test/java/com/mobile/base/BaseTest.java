@@ -10,6 +10,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+/**
+ * Базовый класс для мобильных UI-тестов на Appium.
+ **/
 @ExtendWith(AllureJunit5.class)
 public abstract class BaseTest {
 
@@ -27,7 +30,7 @@ public abstract class BaseTest {
         }
     }
 
-    @Step("Open Wikipedia main screen")
+    @Step("Открыть главную страницу Википедии")
     protected MainScreen openMainScreen() {
         final OnboardingScreen onboardingScreen = new OnboardingScreen(driver);
         onboardingScreen.closeIfDisplayed();
