@@ -3,6 +3,7 @@ package com.mobile.base;
 import com.mobile.helper.DriverFactory;
 import com.mobile.screens.MainScreen;
 import com.mobile.screens.OnboardingScreen;
+import com.mobile.utils.AllureAttachments;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit5.AllureJunit5;
 import io.appium.java_client.android.AndroidDriver;
@@ -28,6 +29,7 @@ public abstract class BaseTest {
     @AfterEach
     void tearDown() {
         if (driver != null) {
+            AllureAttachments.attachScreenshot(driver, "Final screenshot");
             driver.quit();
         }
     }

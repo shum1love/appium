@@ -90,6 +90,18 @@ public class WaitUtils {
     }
 
     /**
+     * Пытается кликнуть по первому видимому локатору из списка за заданный таймаут.
+     */
+    public boolean clickFirstVisible(final Duration timeout, final By... locators) {
+        for (final By locator : locators) {
+            if (clickIfVisible(locator, timeout)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Возвращает первый видимый элемент из коллекции по локатору.
      * Ждёт появления хотя бы одного элемента в течение таймаута по умолчанию.
      */
