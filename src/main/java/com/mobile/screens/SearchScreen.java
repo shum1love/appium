@@ -47,6 +47,7 @@ public class SearchScreen {
         waitUtils.waitForVisible(ARTICLE_TITLE).isDisplayed();
     }
 
+    @Step("Проверить, видимость строки поиска")
     public boolean isSearchInputVisible() {
         return waitUtils.waitForVisible(SEARCH_INPUT).isDisplayed();
     }
