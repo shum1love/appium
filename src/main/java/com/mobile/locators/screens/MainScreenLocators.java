@@ -3,6 +3,9 @@ package com.mobile.locators.screens;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 
+/**
+ * Локаторы экрана главной страницы Wikipedia (Main screen).
+ */
 public final class MainScreenLocators {
 
     private MainScreenLocators() {}
