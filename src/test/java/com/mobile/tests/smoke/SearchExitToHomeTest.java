@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 class SearchExitToHomeTest extends BaseTest {
 
     @Test
-    @DisplayName("Кнопка \"Назад\" из поиска возвращает на главную страницу")
+    @DisplayName("Кнопка 'Назад' из поиска возвращает на главную страницу")
     void shouldReturnToMainFromSearch() {
         final MainScreen mainScreen = openMainScreen();
         final SearchScreen searchScreen = mainScreen.openSearch();

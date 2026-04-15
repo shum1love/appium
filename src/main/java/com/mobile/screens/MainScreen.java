@@ -11,6 +11,7 @@ import java.time.Duration;
 /** Экран главной страницы Википедии. */
 public class MainScreen {
 
+    private static final By WIKIPEDIA_LOGO = AppiumBy.xpath("//android.widget.ImageView[@resource-id=\"org.wikipedia:id/main_toolbar_wordmark\"]");
     private static final By SEARCH_CONTAINER = AppiumBy.id("org.wikipedia:id/search_container");
     private static final Duration SHORT_TIMEOUT = Duration.ofSeconds(3);
 
@@ -24,24 +25,24 @@ public class MainScreen {
 
     @Step("Проверить, что открыта главная страница")
     public boolean isOpened() {
-        return waitUtils.waitForVisible(SEARCH_CONTAINER).isDisplayed();
+        return waitUtils.waitForVisible(WIKIPEDIA_LOGO).isDisplayed();
     }
 
     @Step("Убедиться, что открыта главная страница (обработка back stack)")
     public void ensureOpened() {
-        if (waitUtils.isVisible(SEARCH_CONTAINER, SHORT_TIMEOUT)) {
+        if (waitUtils.isVisible(WIKIPEDIA_LOGO, SHORT_TIMEOUT)) {
             return;
         }
         driver.navigate().back();
-        if (waitUtils.isVisible(SEARCH_CONTAINER, SHORT_TIMEOUT)) {
+        if (waitUtils.isVisible(WIKIPEDIA_LOGO, SHORT_TIMEOUT)) {
             return;
         }
         driver.navigate().back();
-        if (waitUtils.isVisible(SEARCH_CONTAINER, SHORT_TIMEOUT)) {
+        if (waitUtils.isVisible(WIKIPEDIA_LOGO, SHORT_TIMEOUT)) {
             return;
         }
         driver.navigate().back();
-        waitUtils.waitForVisible(SEARCH_CONTAINER);
+        waitUtils.waitForVisible(WIKIPEDIA_LOGO);
     }
 
     @Step("Открыть поиск")
