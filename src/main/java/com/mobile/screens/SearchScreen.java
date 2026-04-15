@@ -33,26 +33,7 @@ public class SearchScreen {
 
     @Step("Открыть первую статью из результатов")
     public SearchScreen openFirstArticle() {
-        waitUtils.waitForVisible(SEARCH_RESULTS_TITLES).click();
-        return this;
-    }
-
-    @Step("Проверить, что заголовок статьи содержит текст: {expectedText}")
-    public SearchScreen titleHasText(final String expectedText) {
-        isArticleOpened();
-
-        final String actualTitle = waitUtils.waitForVisible(ARTICLE_TITLE).getText();
-
-        /*Assertions.assertTrue(
-                actualTitle.contains(expectedText),
-                String.format(
-                        "❌ В заголовке статьи должен присутствовать текст: '%s',\n" +
-                                "   но фактически заголовок: '%s'",
-                        expectedText,
-                        actualTitle
-                )
-        );*/
-
+        waitUtils.getFirstElement(SEARCH_RESULTS_TITLES).click();
         return this;
     }
 
@@ -62,8 +43,8 @@ public class SearchScreen {
     }
 
     @Step("Проверить, что статья открыта")
-    public boolean isArticleOpened() {
-        return waitUtils.waitForVisible(ARTICLE_TITLE).isDisplayed();
+    public void isArticleOpened() {
+        waitUtils.waitForVisible(ARTICLE_TITLE).isDisplayed();
     }
 
     public boolean isSearchInputVisible() {

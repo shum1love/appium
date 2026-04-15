@@ -21,6 +21,8 @@ public abstract class BaseTest {
     @BeforeEach
     void setUp() {
         driver = DriverFactory.createAndroidDriver();
+        driver.terminateApp("org.wikipedia");
+        driver.activateApp("org.wikipedia");
     }
 
     @AfterEach
