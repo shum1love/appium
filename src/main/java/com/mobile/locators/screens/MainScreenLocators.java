@@ -5,8 +5,7 @@ import org.openqa.selenium.By;
 
 public final class MainScreenLocators {
 
-    private MainScreenLocators() {
-    }
+    private MainScreenLocators() {}
 
     public static final By WIKIPEDIA_LOGO = AppiumBy.xpath(
             "//android.widget.ImageView[@resource-id=\"org.wikipedia:id/main_toolbar_wordmark\"]"

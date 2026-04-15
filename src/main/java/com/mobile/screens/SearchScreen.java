@@ -47,11 +47,6 @@ public class SearchScreen {
         return waitUtils.waitForVisible(SearchScreenLocators.SEARCH_INPUT).isDisplayed();
     }
 
-    @Step("Проверить, что отображается заголовок Search")
-    public boolean isSearchHeaderVisible() {
-        return waitUtils.waitForVisible(SearchScreenLocators.SEARCH_HEADER_TEXT).isDisplayed();
-    }
-
     @Step("Вернуться назад с текущего экрана")
     public void tapBack() {
         driver.navigate().back();

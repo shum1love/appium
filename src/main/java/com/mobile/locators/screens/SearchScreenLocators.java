@@ -13,8 +13,5 @@ public final class SearchScreenLocators {
             "//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View"
     );
     public static final By ARTICLE_TITLE = AppiumBy.xpath("(//android.widget.TextView[@text='Appium'])[1]");
-
-    // Header is helpful for smoke-check that we are on Search tab.
-    public static final By SEARCH_HEADER_TEXT = AppiumBy.xpath("//*[@text='Search']");
 }
 

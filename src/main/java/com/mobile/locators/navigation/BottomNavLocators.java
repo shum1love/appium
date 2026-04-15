@@ -8,7 +8,6 @@ public final class BottomNavLocators {
     private BottomNavLocators() {
     }
 
-    // Wikipedia app bottom nav IDs may vary between versions; keep a small fallback set.
     public static final By TAB_SAVED_BY_ID = AppiumBy.id("org.wikipedia:id/nav_tab_saved");
     public static final By TAB_SAVED_READING_LISTS_BY_ID = AppiumBy.id("org.wikipedia:id/nav_tab_reading_lists");
     public static final By TAB_SAVED_BY_TEXT = AppiumBy.xpath("//*[@text='Saved' or @content-desc='Saved']");
