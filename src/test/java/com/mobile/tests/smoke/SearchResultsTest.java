@@ -25,7 +25,7 @@ class SearchResultsTest extends BaseTest {
         final MainScreen mainScreen = openMainScreen();
         final SearchScreen searchScreen = mainScreen.openSearch();
 
-        searchScreen.typeSearchQuery(SearchData.DEFAULT_QUERY);
+        searchScreen.typeSearchQuery(SearchData.APPIUM);
 
         Assertions.assertTrue(searchScreen.hasResults(), "Результаты поиска должны отображаться");
     }

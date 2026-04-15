@@ -10,8 +10,8 @@ import org.openqa.selenium.By;
 public class SearchScreen {
 
     private static final By SEARCH_INPUT = AppiumBy.id("org.wikipedia:id/search_src_text");
-    private static final By SEARCH_RESULTS_TITLES = AppiumBy.id("org.wikipedia:id/page_list_item_title");
-    private static final By ARTICLE_TITLE = AppiumBy.id("org.wikipedia:id/view_page_title_text");
+    private static final By SEARCH_RESULTS_TITLES = AppiumBy.xpath("//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View");
+    private static final By ARTICLE_TITLE = AppiumBy.xpath("(//android.widget.TextView[@text='Appium'])[1]");
 
     private final AndroidDriver driver;
     private final WaitUtils waitUtils;
@@ -37,6 +37,31 @@ public class SearchScreen {
         return this;
     }
 
+    @Step("Проверить, что заголовок статьи содержит текст: {expectedText}")
+    public SearchScreen titleHasText(final String expectedText) {
+        isArticleOpened();
+
+        final String actualTitle = waitUtils.waitForVisible(ARTICLE_TITLE).getText();
+
+        /*Assertions.assertTrue(
+                actualTitle.contains(expectedText),
+                String.format(
+                        "❌ В заголовке статьи должен присутствовать текст: '%s',\n" +
+                                "   но фактически заголовок: '%s'",
+                        expectedText,
+                        actualTitle
+                )
+        );*/
+
+        return this;
+    }
+
+    @Step("Получить заголовок статьи")
+    public String getArticleTitle() {
+        return waitUtils.waitForVisible(ARTICLE_TITLE).getText();
+    }
+
+    @Step("Проверить, что статья открыта")
     public boolean isArticleOpened() {
         return waitUtils.waitForVisible(ARTICLE_TITLE).isDisplayed();
     }

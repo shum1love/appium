@@ -25,7 +25,7 @@ class SearchInputVisibilityTest extends BaseTest {
         final MainScreen mainScreen = openMainScreen();
         final SearchScreen searchScreen = mainScreen.openSearch();
 
-        searchScreen.typeSearchQuery(SearchData.DEFAULT_QUERY);
+        searchScreen.typeSearchQuery(SearchData.APPIUM);
 
         Assertions.assertTrue(searchScreen.isSearchInputVisible(), "Поле поиска должно оставаться видимым после ввода");
     }
