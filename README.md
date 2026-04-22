@@ -22,6 +22,7 @@
 - `src/main/java/com/mobile/enums`, `locators` — заготовки под перечисления и общие локаторы.
 - `src/test/java/com/mobile/base/BaseTest.java` — общий setup/teardown.
 - `src/test/java/com/mobile/tests/smoke/*` — по одному smоke-кейсу на класс.
+- `src/test/java/com/mobile/architecture/ArchitectureTest.java` — архитектурные правила (ArchUnit) для поддержки чистой структуры.
 
 ## Запуск
 1) Запусти эмулятор/устройство (`adb devices` должен показать девайс).  
@@ -41,6 +42,14 @@
    ```bash
    mvn allure:report
    ```
+
+### Архитектурные проверки (ArchUnit)
+Запуск вместе со всеми тестами уже включён в обычный `mvn test`.
+
+Если нужно прогнать только архитектурные правила:
+```bash
+mvn test -Dtest=ArchitectureTest
+```
 
 ### Параметры через `-D` (пример)
 ```bash
